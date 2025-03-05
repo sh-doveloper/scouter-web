@@ -1,6 +1,8 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import scouterMain from 'assets/images/scouter/scouter-main.png';
+// import scouterMain from 'assets/images/scouter/scouter-main.png';
+// import scouterMain from 'assets/images/scouter/Kbank_logo.svg';
+import scouterMain from 'assets/images/scouter/scouter_logo_01.svg';
 
 /**
  * if you want to use image instead of <svg> uncomment following.
@@ -26,8 +28,8 @@ const Logo = () => {
       <img
         src={scouterMain}
         alt="Scouter"
-        width="80"
-        height="35"
+        width="110"
+        height="65"
         style={{ filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none' }}
       />
       {/*<svg width="118" height="35" viewBox="0 0 118 35" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
