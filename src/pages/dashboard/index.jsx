@@ -52,29 +52,88 @@ export default function DashboardDefault() {
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
       {/* row 1 */}
-      <Grid item xs={12} sx={{ mb: -2.25 }}>
-        <Typography variant="h5">Dashboard</Typography>
+      {/*<Grid item xs={12} sx={{ mb: -2.25 }}>*/}
+      {/*  <Typography variant="h5">Daily Report</Typography>*/}
+      {/*</Grid>*/}
+      <Grid item xs={12} md={5} lg={3}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography variant="h5">로그인 일별 집계</Typography>
+          </Grid>
+          <Grid item />
+        </Grid>
+        <MainCard sx={{ mt: 2 }} content={false}>
+          <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
+            <ListItemButton divider>
+              <ListItemText primary="최근 30일 Login 사용자 추이" />
+              <Typography variant="h5">+45.14%</Typography>
+            </ListItemButton>
+          </List>
+          <ReportAreaChart />
+        </MainCard>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
+      <Grid item xs={12} md={5} lg={3}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography variant="h5">푸시 일별 집계</Typography>
+          </Grid>
+          <Grid item />
+        </Grid>
+        <MainCard sx={{ mt: 2 }} content={false}>
+          <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
+            <ListItemButton divider>
+              <ListItemText primary="최근 30일 Push 건수 추이" />
+              <Typography variant="h5">+45.14%</Typography>
+            </ListItemButton>
+          </List>
+          <ReportAreaChart />
+        </MainCard>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
+      <Grid item xs={12} md={5} lg={3}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography variant="h5">머지 일별 집계</Typography>
+          </Grid>
+          <Grid item />
+        </Grid>
+        <MainCard sx={{ mt: 2 }} content={false}>
+          <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
+            <ListItemButton divider>
+              <ListItemText primary="최근 30일 Merge 건수 추이" />
+              <Typography variant="h5">+45.14%</Typography>
+            </ListItemButton>
+          </List>
+          <ReportAreaChart />
+        </MainCard>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
-      </Grid>
+      {/*<Grid item xs={12} sm={6} md={4} lg={3}>*/}
+      {/*  <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />*/}
+      {/*</Grid>*/}
+      {/*<Grid item xs={12} sm={6} md={4} lg={3}>*/}
+      {/*  <AnalyticEcommerce commerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />*/}
+      {/*</Grid>*/}
+      {/*<Grid item xs={12} sm={6} md={4} lg={3}>*/}
+      {/*  <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />*/}
+      {/*</Grid>*/}
 
       <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
-
       {/* row 2 */}
-      <Grid item xs={12} md={7} lg={8}>
+      <Grid item xs={12} md={7} lg={6}>
         <UniqueVisitorCard />
       </Grid>
-      <Grid item xs={12} md={5} lg={4}>
+      {/*<Grid item xs={12} md={7} lg={6}>*/}
+      {/*  <Grid container alignItems="center" justifyContent="space-between">*/}
+      {/*    <Grid item>*/}
+      {/*      <Typography variant="h5">Recent Orders</Typography>*/}
+      {/*    </Grid>*/}
+      {/*    <Grid item />*/}
+      {/*  </Grid>*/}
+      {/*  <MainCard sx={{ mt: 2 }} content={false}>*/}
+      {/*    <OrdersTable />*/}
+      {/*    /!* <CustomizedDataGrid /> *!/*/}
+      {/*  </MainCard>*/}
+      {/*</Grid>*/}
+      <Grid item xs={12} md={5} lg={6}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="h5">Income Overview</Typography>
@@ -93,9 +152,8 @@ export default function DashboardDefault() {
           <MonthlyBarChart />
         </MainCard>
       </Grid>
-
       {/* row 3 */}
-      <Grid item xs={12} md={7} lg={8}>
+      <Grid item xs={12} md={7} lg={12}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="h5">Recent Orders</Typography>
@@ -132,7 +190,6 @@ export default function DashboardDefault() {
           <ReportAreaChart />
         </MainCard>
       </Grid>
-
       {/* row 4 */}
       <Grid item xs={12} md={7} lg={8}>
         <SaleReportCard />
