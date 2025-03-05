@@ -9,7 +9,7 @@ import ReactApexChart from 'react-apexcharts';
 // chart options
 const areaChartOptions = {
   chart: {
-    height: 340,
+    height: 140,
     type: 'line',
     toolbar: {
       show: false
@@ -96,5 +96,5 @@ export default function ReportAreaChart() {
     }
   ]);
 
-  return <ReactApexChart options={options} series={series} type="line" height={340} />;
+  return <ReactApexChart options={options} series={series} type="line" height={140} />;
 }
