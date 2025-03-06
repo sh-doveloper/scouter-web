@@ -17,9 +17,9 @@ const member = {
       id: 'users',
       title: '사용자',
       type: 'item',
-      url: '/users',
+      url: '/member',
       icon: icons.TeamOutlined,
-      breadcrumbs: false
+      breadcrumbs: true
     }
   ]
 };
