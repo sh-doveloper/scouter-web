@@ -18,7 +18,7 @@ const contribution = {
       id: 'developers',
       title: '개발자',
       type: 'item',
-      url: '/developers',
+      url: '/contribution/developers',
       icon: icons.CodeOutlined,
       breadcrumbs: false
     },
@@ -26,7 +26,7 @@ const contribution = {
       id: 'projects',
       title: '프로젝트',
       type: 'item',
-      url: '/projects',
+      url: '/contribution/projects',
       icon: icons.ProjectOutlined,
       breadcrumbs: false
     }
