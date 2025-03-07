@@ -19,7 +19,7 @@ const dashboard = {
       id: 'dashboard',
       title: '홈',
       type: 'item',
-      url: '/dashboard/default',
+      url: '/dashboard/home',
       icon: icons.LineChartOutlined,
       breadcrumbs: false
     }
