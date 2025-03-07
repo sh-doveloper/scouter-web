@@ -15,14 +15,14 @@ function renderStatus(status) {
 }
 // 컬럼 정의
 const columns = [
-  { field: 'id', headerName: 'ID', flex: 1, minWidth: 50 },
-  { field: 'username', headerName: 'Username', flex: 1, minWidth: 120 },
-  { field: 'name', headerName: 'Name', flex: 1.5, minWidth: 150 },
-  { field: 'email', headerName: 'Email', flex: 1.5, minWidth: 200 },
-  { field: 'userTypeCode', headerName: 'User Type', flex: 1, minWidth: 120 },
-  { field: 'state', headerName: 'State', flex: 1, minWidth: 100, renderCell: (params) => renderStatus(params.value) },
-  { field: 'signInCount', headerName: 'Sign-In Count', flex: 1, minWidth: 100, align: 'right' },
-  { field: 'createdAt', headerName: 'Created At', flex: 1, minWidth: 150 }
+  { field: 'projectId', headerName: 'Project ID', flex: 1, minWidth: 50 },
+  { field: 'projectName', headerName: 'Project 이름', flex: 1, minWidth: 120 },
+  { field: 'projectVolume', headerName: 'Project Volume', flex: 1.5, minWidth: 150 },
+  { field: 'projectParticipantCount', headerName: 'Project 참여자 수', flex: 1.5, minWidth: 200 },
+  { field: 'projectPushCount', headerName: 'Project 푸시 수', flex: 1, minWidth: 120 },
+  { field: 'projectReviewCount', headerName: 'Project 리뷰 수', flex: 1, minWidth: 100, renderCell: (params) => renderStatus(params.value) }
+  // { field: 'signInCount', headerName: 'Sign-In Count', flex: 1, minWidth: 100, align: 'right' },
+  // { field: 'createdAt', headerName: 'Created At', flex: 1, minWidth: 150 }
 ];
 
 export default function CustomizedDataGrid() {

@@ -26,7 +26,7 @@ const barChartOptions = {
     enabled: false
   },
   xaxis: {
-    categories: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    categories: ['남정유', '허윤경', '이진영', '홍서연', '이창수', '김채원', '도승훈'],
     axisBorder: {
       show: false
     },
@@ -63,6 +63,8 @@ export default function MonthlyBarChart() {
       ...prevState,
       colors: [info],
       xaxis: {
+        ...prevState.xaxis,
+        categories: ['남정유', '허윤경', '이진영', '홍서연', '이창수', '김채원', '도승훈'], // 새로운 레이블 설정
         labels: {
           style: {
             colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary]
