@@ -7,10 +7,18 @@ import {
   FormControl,
   Select,
   TextField,
-  Button
+  Button,
+  Backdrop,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
 } from '@mui/material';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+import SendIcon from '@mui/icons-material/Send';
 import UserGrid from './components/UserGrid';
+import UserDetail from './components/UserDetail';
 import MainCard from '../../components/MainCard';
 
 export default function BasicGrid() {
@@ -29,11 +37,10 @@ export default function BasicGrid() {
   const handleBackdropOpen = () => setBackdropOpen(true);
   const handleBackdropClose = () => setBackdropOpen(false);
 
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
-        {/* 검색 그리드 */}
+        {/* 검색 필터 */}
         <Grid item md={12}>
           <MainCard border={false} shadow={3} boxShadow>
             <Grid container spacing={3} alignItems="center">
@@ -69,6 +76,11 @@ export default function BasicGrid() {
                   조회
                 </Button>
               </Grid>
+              <Grid item>
+                <Button variant="contained" size="medium" endIcon={<SendIcon />} onClick={handleOpen}>
+                  팝업 테스트
+                </Button>
+              </Grid>
             </Grid>
           </MainCard>
         </Grid>
@@ -80,6 +92,24 @@ export default function BasicGrid() {
           </MainCard>
         </Grid>
       </Grid>
+
+      {/* Backdrop (로딩) */}
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={backdropOpen} onClick={handleBackdropClose}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
+      {/* Dialog (팝업) */}
+      <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
+        <DialogTitle>테스트 팝업 제목</DialogTitle>
+        <DialogContent dividers>
+          <UserDetail />
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" size="medium" onClick={handleClose} color="secondary">
+            닫기
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

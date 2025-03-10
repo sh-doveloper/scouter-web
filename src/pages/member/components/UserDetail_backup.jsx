@@ -34,7 +34,7 @@ const UserInfoCard = ({ title, icon, children }) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="subtitle1" sx={{ color: theme.palette.text.primary, display: 'flex', alignItems: 'center' }}>
+        <Typography variant="h6" sx={{ color: theme.palette.text.primary, display: 'flex', alignItems: 'center' }}>
           {icon} {title}
         </Typography>
         <Divider sx={{ my: 1, backgroundColor: theme.palette.divider }} />
@@ -118,33 +118,33 @@ export default function UserDetail({ user }) {
         {/* 기본 정보 */}
         <Grid item xs={12} sm={6}>
           <UserInfoCard title="기본 정보" icon={<Person sx={{ verticalAlign: 'middle', marginRight: 1 }} />}>
-            <Typography>사용자아이디 : {userData.id}</Typography>
-            <Typography>가입일 : {formatDate(userData.createdAt)}</Typography>
-            <Typography>현재 로그인 IP : {userData.currentSignInIp}</Typography>
+            <Typography><span>사용자아이디 :</span> {userData.id}</Typography>
+            <Typography><span>가입일 :</span> {formatDate(userData.createdAt)}</Typography>
+            <Typography><span>현재 로그인 IP :</span> {userData.currentSignInIp}</Typography>
           </UserInfoCard>
         </Grid>
 
         {/* 활동 정보 */}
         <Grid item xs={12} sm={6}>
           <UserInfoCard title="활동 정보" icon={<Email sx={{ verticalAlign: 'middle', marginRight: 1 }} />}>
-            <Typography>이메일 : {userData.email}</Typography>
-            <Typography>최근 활동 : {formatDate(userData.lastActivityOn)}</Typography>
+            <Typography><span>이메일 :</span> {userData.email}</Typography>
+            <Typography><span>최근 활동 :</span> {formatDate(userData.lastActivityOn)}</Typography>
           </UserInfoCard>
         </Grid>
 
         {/* 보안 정보 */}
         <Grid item xs={12} sm={6}>
           <UserInfoCard title="보안 설정" icon={<Lock sx={{ verticalAlign: 'middle', marginRight: 1 }} />}>
-            <Typography>관리자 여부 : {renderBoolean(userData.admin)}</Typography>
-            <Typography>이중 인증 필요 : {renderBoolean(userData.otpRequiredForLogin)}</Typography>
+            <Typography><span>관리자 여부 :</span> {renderBoolean(userData.admin)}</Typography>
+            <Typography><span>이중 인증 필요 :</span> {renderBoolean(userData.otpRequiredForLogin)}</Typography>
           </UserInfoCard>
         </Grid>
 
         {/* 계정 설정 */}
         <Grid item xs={12} sm={6}>
           <UserInfoCard title="계정 설정" icon={<Work sx={{ verticalAlign: 'middle', marginRight: 1 }} />}>
-            <Typography>프로젝트 제한 : {userData.projectsLimit} 개</Typography>
-            <Typography>유저 타입 : {userData.userTypeCode}</Typography>
+            <Typography><span>프로젝트 제한 :</span> {userData.projectsLimit} 개</Typography>
+            <Typography><span>유저 타입 :</span> {userData.userTypeCode}</Typography>
           </UserInfoCard>
         </Grid>
 
