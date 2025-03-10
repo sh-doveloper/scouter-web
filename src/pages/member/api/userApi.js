@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3010/api'; // API 기본 URL
-import mockData from "./gitlab_users_sample_data.json"; // JSON 파일 임포트
-
+import mockData from './gitlab_users_sample_data.json'; // JSON 파일 임포트
+import mockUser from './gitlab_user_sample_data.json'; // JSON 파일 임포트
 
 async function fetchData(page, pageSize) {
   try {
@@ -65,7 +65,6 @@ async function fetchUserById(userId) {
   }
 }
 
-
 /**
  * 임시
  * 전체 사용자 목록 조회 (Mock 데이터 사용)
@@ -92,12 +91,30 @@ async function fetchUsersAtMockData(pageNumber = 1, pageSize = 10) {
       users: pagedUsers
     };
   } catch (error) {
-    console.error("Mock 사용자 목록 로딩 실패:", error);
+    console.error('Mock 사용자 목록 로딩 실패:', error);
     return { users: [], totalCount: 0 };
+  }
+}
+
+/**
+ * 임시
+ * 전체 사용자 상세 조회 (Mock 데이터 사용)
+ */
+async function fetchUserAtMockData(userId) {
+  try {
+    console.log('userId' + userId);
+    // 전체 사용자 목록
+    const userDetailData = mockUser;
+    return {
+      userDetail: userDetailData
+    };
+  } catch (error) {
+    console.error('Mock 사용자 상세 로딩 실패:', error);
+    return { userDetail: null };
   }
 }
 
 export default fetchUsers;
 
 // JavaScript에서 모듈 내보내기
-export { fetchBarChartData, fetchData, fetchUserById, fetchUsers, fetchUsersAtMockData };
+export { fetchBarChartData, fetchData, fetchUserById, fetchUsers, fetchUsersAtMockData, fetchUserAtMockData };
