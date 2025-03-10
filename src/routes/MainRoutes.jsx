@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import Dashboard from 'layout/Dashboard';
+import { Navigate } from 'react-router';
 
 const Member = Loadable(lazy(() => import('pages/member/index')));
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
@@ -22,8 +23,8 @@ const MainRoutes = {
   element: <Dashboard />,
   children: [
     {
-      path: '/',
-      element: <DashboardDefault />
+      index: true, // 기본 경로를 설정
+      element: <Navigate to="/main/dashboard" replace />
     },
     {
       path: '/contribution/developers',
