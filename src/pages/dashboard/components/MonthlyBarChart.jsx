@@ -19,8 +19,37 @@ const barChartOptions = {
   plotOptions: {
     bar: {
       columnWidth: '45%',
-      borderRadius: 4
+      borderRadius: 4,
+      distributed: false,
+      colors: {
+        // backgroundBarColors: [], // ✅ 배경 색상 제거
+        backgroundBarOpacity: 0 // ✅ 흐려지는 배경 완전히 제거
+        // opacity: 1 // ✅ 막대 그래프 자체의 투명도 조절
+      }
+      // borderRadiusApplication: 'end', // ✅ 막대의 끝부분만 둥글게 (전체 hover 배경 방지)
+      // borderRadiusWhenStacked: 'last' // ✅ 여러 개의 막대가 겹칠 때, 마지막 막대만 둥글게
+      // colors: {
+      //   ranges: [
+      //     {
+      //       from: 0,
+      //       to: 10000, // ✅ 최대값을 충분히 크게 설정하여 모든 막대에 적용
+      //       color: undefined, // ✅ 기본 색상 유지
+      //       opacity: 1 // ✅ Hover 시 색상 변경 없이 유지
+      //     }
+      //   ]
+      // }
     }
+  },
+  states: {
+    hover: {
+      enabled: false
+    }
+  },
+  fill: {
+    opacity: 1
+  },
+  tooltip: {
+    shared: false
   },
   dataLabels: {
     enabled: false
@@ -48,11 +77,11 @@ export default function MonthlyBarChart() {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
-  const info = theme.palette.info.light;
+  const info = theme.palette.primary.light;
 
   const [series] = useState([
     {
-      data: [80, 95, 70, 42, 65, 55, 78]
+      data: [80, 95, 70, 42, 65, 55, 78, 10, 10, 10]
     }
   ]);
 
@@ -75,7 +104,7 @@ export default function MonthlyBarChart() {
   }, [primary, info, secondary]);
 
   return (
-    <Box id="chart" sx={{ bgcolor: 'transparent' }}>
+    <Box id="chart">
       <ReactApexChart options={options} series={series} type="bar" height={365} />
     </Box>
   );

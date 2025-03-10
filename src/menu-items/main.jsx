@@ -10,20 +10,20 @@ const icons = {
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
-const dashboard = {
-  id: 'group-dashboard',
-  title: 'Dashboard',
+const main = {
+  id: 'group-main',
+  title: 'Main',
   type: 'group',
   children: [
     {
-      id: 'dashboard',
-      title: '홈',
+      id: 'main',
+      title: 'Dashboard',
       type: 'item',
-      url: '/dashboard/home',
+      url: '/main/dashboard',
       icon: icons.LineChartOutlined,
-      breadcrumbs: false
+      breadcrumbs: true
     }
   ]
 };
 
-export default dashboard;
+export default main;

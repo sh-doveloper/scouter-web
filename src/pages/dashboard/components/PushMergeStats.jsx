@@ -13,14 +13,14 @@ import IncomeAreaChart from './IncomeAreaChart';
 
 // ==============================|| DEFAULT - UNIQUE VISITOR ||============================== //
 
-export default function UniqueVisitorCard() {
+export default function PushMergeStats() {
   const [slot, setSlot] = useState('week');
 
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Typography variant="h5">Gitlab Push 및 Merge 집계</Typography>
+          <Typography variant="h5">Push & Merge 통계</Typography>
         </Grid>
         <Grid item>
           <Stack direction="row" alignItems="center" spacing={0}>
@@ -43,7 +43,7 @@ export default function UniqueVisitorCard() {
           </Stack>
         </Grid>
       </Grid>
-      <MainCard content={false} sx={{ mt: 1.5 }}>
+      <MainCard sx={{ mt: 1.2 }} content={false} border={false} shadow={3} boxShadow>
         <Box sx={{ pt: 1, pr: 2 }}>
           <IncomeAreaChart slot={slot} />
         </Box>

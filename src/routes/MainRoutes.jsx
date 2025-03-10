@@ -9,7 +9,8 @@ const Color = Loadable(lazy(() => import('pages/component-overview/color')));
 const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
-const Developer = Loadable(lazy(() => import('pages/contribution/developers/index')));
+const Developers = Loadable(lazy(() => import('pages/contribution/developers/index')));
+const Projects = Loadable(lazy(() => import('pages/contribution/projects/index')));
 
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
@@ -26,10 +27,14 @@ const MainRoutes = {
     },
     {
       path: '/contribution/developers',
-      element: <Developer />
+      element: <Developers />
     },
     {
-      path: 'member',
+      path: '/contribution/projects',
+      element: <Projects />
+    },
+    {
+      path: '/member/users',
       element: <Member />
     },
     {
@@ -37,10 +42,10 @@ const MainRoutes = {
       element: <Color />
     },
     {
-      path: 'dashboard',
+      path: 'main',
       children: [
         {
-          path: 'home',
+          path: 'dashboard',
           element: <DashboardDefault />
         }
       ]

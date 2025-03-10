@@ -1,9 +1,9 @@
 import Chip from '@mui/material/Chip';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
+import { fetchDevelopers } from '../api/DevelopersApi';
 
 // import { columns, rows } from '../internals/data/gridData';
-import { fetchUsers } from '../../api/data.js';
 
 function renderStatus(status) {
   const colors = {
@@ -15,39 +15,49 @@ function renderStatus(status) {
 }
 // 컬럼 정의
 const columns = [
-  { field: 'projectId', headerName: 'Project ID', flex: 1, minWidth: 50 },
-  { field: 'projectName', headerName: 'Project 이름', flex: 1, minWidth: 120 },
-  { field: 'projectVolume', headerName: 'Project Volume', flex: 1.5, minWidth: 150 },
-  { field: 'projectParticipantCount', headerName: 'Project 참여자 수', flex: 1.5, minWidth: 200 },
-  { field: 'projectPushCount', headerName: 'Project 푸시 수', flex: 1, minWidth: 120 },
-  { field: 'projectReviewCount', headerName: 'Project 리뷰 수', flex: 1, minWidth: 100, renderCell: (params) => renderStatus(params.value) }
-  // { field: 'signInCount', headerName: 'Sign-In Count', flex: 1, minWidth: 100, align: 'right' },
-  // { field: 'createdAt', headerName: 'Created At', flex: 1, minWidth: 150 }
+  { field: 'userId', headerName: 'User ID', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+  { field: 'userName', headerName: 'User Name', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+  { field: 'mergeCount', headerName: 'Merge Count', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+  { field: 'pushCount', headerName: 'Push Count', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+  { field: 'reviewCount', headerName: 'Review Count', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+  { field: 'totalAddLinesCount', headerName: 'Add Lines Count', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+  { field: 'totalRemoveLinesCount', headerName: 'Remove Lines Count', flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' }
 ];
 
-export default function CustomizedDataGrid() {
+export default function DevelopersDataGrid({ loadDevelopersRef }) {
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
 
   // 서버에서 데이터를 가져오는 함수
-  const loadUsers = async (page, pageSize) => {
+  const loadDevelopers = async ({
+    searchName = '',
+    startDate = '',
+    endDate = '',
+    page = paginationModel.page,
+    pageSize = paginationModel.pageSize
+  } = {}) => {
     setLoading(true);
     try {
-      const { users, totalCount } = await fetchUsers(page, pageSize); // userList와 userListCnt 가져오기
-      setRows(users.map((user) => ({ ...user, id: user.id }))); // ID 필드 추가
+      const { totalCount, developers } = await fetchDevelopers(searchName, startDate, endDate, page, pageSize);
+      setRows(developers.map((developers) => ({ ...developers, id: developers.userId }))); // ID 필드 추가
       setTotalRows(totalCount); // 전체 사용자 수 설정
     } catch (error) {
-      console.error('사용자 데이터를 불러오는 중 오류 발생:', error);
+      console.error('데이터를 불러오는 중 오류 발생:', error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadUsers(paginationModel.page, paginationModel.pageSize);
+    loadDevelopers({ page: paginationModel.page, pageSize: paginationModel.pageSize });
   }, [paginationModel.page, paginationModel.pageSize]);
+
+  // 상위 컴포넌트에서 `loadDevelopers` 함수를 호출할 수 있도록 참조 전달
+  if (loadDevelopersRef) {
+    loadDevelopersRef.current = loadDevelopers;
+  }
 
   return (
     <DataGrid

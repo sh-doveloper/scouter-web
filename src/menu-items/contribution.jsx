@@ -20,7 +20,7 @@ const contribution = {
       type: 'item',
       url: '/contribution/developers',
       icon: icons.CodeOutlined,
-      breadcrumbs: false
+      breadcrumbs: true
     },
     {
       id: 'projects',
@@ -28,7 +28,7 @@ const contribution = {
       type: 'item',
       url: '/contribution/projects',
       icon: icons.ProjectOutlined,
-      breadcrumbs: false
+      breadcrumbs: true
     }
   ]
 };

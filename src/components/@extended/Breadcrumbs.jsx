@@ -1,115 +1,115 @@
+// base
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 // material-ui
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { emphasize, styled } from '@mui/material/styles';
+import Chip from '@mui/material/Chip';
 
 // project import
 import MainCard from 'components/MainCard';
+import menuItems from 'menu-items';
 
-export default function Breadcrumbs({ navigation, title, ...others }) {
-  const location = useLocation();
-  const [main, setMain] = useState();
-  const [item, setItem] = useState();
-
-  // set active item state
-  const getCollapse = (menu) => {
-    if (menu.children) {
-      menu.children.filter((collapse) => {
-        if (collapse.type && collapse.type === 'collapse') {
-          getCollapse(collapse);
-        } else if (collapse.type && collapse.type === 'item') {
-          if (location.pathname === collapse.url) {
-            setMain(menu);
-            setItem(collapse);
-          }
-        }
-        return false;
-      });
-    }
+// 스타일 셋팅
+const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+  const backgroundColor = theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[800];
+  return {
+    backgroundColor,
+    height: theme.spacing(3),
+    color: theme.palette.text.primary,
+    fontWeight: theme.typography.fontWeightRegular,
+    '&:hover, &:focus': {
+      backgroundColor: emphasize(backgroundColor, 0.06)
+    },
+    '&:active': {
+      boxShadow: theme.shadows[1],
+      backgroundColor: emphasize(backgroundColor, 0.12)
+    },
+    cursor: 'default' // 링크 비활성화 (클릭 불가)
   };
+});
 
-  useEffect(() => {
-    navigation?.items?.map((menu) => {
-      if (menu.type && menu.type === 'group') {
-        getCollapse(menu);
+// 특정 경로명을 한글로 변환하는 매핑 객체
+const breadcrumbMap = {
+  main: 'Main',
+  dashboard: 'Dashboard',
+  member: 'Member',
+  users: '사용자',
+  contribution: 'Contribution',
+  developers: '개발자',
+  projects: '프로젝트'
+};
+
+// 현재 경로(`pathname`)를 기반으로 `menuItems`에서 `title`을 찾는 함수
+const findTitleByPath = (pathname, menuList) => {
+  for (const menu of menuList) {
+    if (menu.children) {
+      for (const item of menu.children) {
+        if (item.url === pathname) {
+          return item.title;
+        }
       }
-      return false;
-    });
-  });
-
-  // only used for component demo breadcrumbs
-  if (location.pathname === '/breadcrumbs') {
-    location.pathname = '/dashboard/analytics';
+    }
   }
+  return '';
+};
 
-  let mainContent;
-  let itemContent;
-  let breadcrumbContent = <Typography />;
-  let itemTitle = '';
+export default function Breadcrumbs({ title, ...others }) {
+  const location = useLocation();
+  const pathNames = location.pathname.split('/').filter((x) => x); // 현재 URL을 '/'로 나누어 배열로 변환
 
-  // collapse item
-  if (main && main.type === 'collapse') {
-    mainContent = (
-      <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="textSecondary">
-        {main.title}
-      </Typography>
-    );
-  }
+  // 현재 URL을 기반으로 `menuItems`에서 `title` 찾기
+  const resolvedTitle = findTitleByPath(location.pathname, menuItems.items) || title;
 
-  // items
-  if (item && item.type === 'item') {
-    itemTitle = item.title;
-    itemContent = (
-      <Typography variant="subtitle1" color="textPrimary">
-        {itemTitle}
-      </Typography>
-    );
+  console.log('📢 Breadcrumbs Title:', resolvedTitle);
 
-    // main
-    if (item.breadcrumbs !== false) {
-      breadcrumbContent = (
-        <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
-          <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
-            <Grid item>
-              <MuiBreadcrumbs aria-label="breadcrumb">
-                <Typography component={Link} to="/" color="textSecondary" variant="h6" sx={{ textDecoration: 'none' }}>
-                  Home
+  return (
+    <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
+      <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
+        <Grid item>
+          <MuiBreadcrumbs aria-label="breadcrumb">
+            {pathNames.map((value, index) => {
+              const label = breadcrumbMap[value] || value; // 매핑된 값이 있으면 한글 변환, 없으면 원래 값 유지
+              return <StyledBreadcrumb key={index} label={label} />;
+            })}
+          </MuiBreadcrumbs>
+        </Grid>
+        {resolvedTitle && (
+          <Grid item sx={{ mt: 2, width: '100%' }}>
+            {resolvedTitle && (
+              <Grid item sx={{ mt: 2, width: '100%' }}>
+                <Typography
+                  variant="h4" // 크기 키우기
+                  sx={{
+                    fontWeight: 'bold', // 굵기 강조
+                    textAlign: 'left', // 좌측 정렬
+                    letterSpacing: '0.5px', // 글자 간격 살짝 넓히기
+                    textTransform: 'capitalize', // 대문자로 변환
+                    color: 'primary.main', // 테마 색상 사용
+                    borderBottom: '2px solid', // 하단 경계선 추가
+                    borderColor: 'primary.light', // 경계선 색상 조정
+                    pb: 1 // 패딩 추가 (경계선과 간격)
+                  }}
+                >
+                  {resolvedTitle}
                 </Typography>
-                {mainContent}
-                {itemContent}
-              </MuiBreadcrumbs>
-            </Grid>
-            {title && (
-              <Grid item sx={{ mt: 2 }}>
-                <Typography variant="h5">{item.title}</Typography>
               </Grid>
             )}
           </Grid>
-        </MainCard>
-      );
-    }
-  }
-
-  return breadcrumbContent;
+          // <Grid item sx={{ mt: 2 }}>
+          //   <Typography variant="h5">{resolvedTitle}</Typography>
+          // </Grid>
+        )}
+      </Grid>
+    </MainCard>
+  );
 }
 
 Breadcrumbs.propTypes = {
-  card: PropTypes.bool,
-  custom: PropTypes.bool,
-  divider: PropTypes.bool,
-  heading: PropTypes.string,
-  icon: PropTypes.bool,
-  icons: PropTypes.bool,
-  links: PropTypes.array,
-  maxItems: PropTypes.number,
-  rightAlign: PropTypes.bool,
-  separator: PropTypes.any,
-  title: PropTypes.bool,
-  titleBottom: PropTypes.bool,
+  title: PropTypes.string, // title을 문자열로 받도록 설정
   sx: PropTypes.any,
   others: PropTypes.any
 };

@@ -1,5 +1,5 @@
 // project import
-import dashboard from './dashboard';
+import main from './main';
 import contribution from './contribution';
 import member from './member';
 import utilities from './utilities';
@@ -7,7 +7,7 @@ import utilities from './utilities';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, member, contribution, utilities]
+  items: [main, member, contribution, utilities]
 };
 
 export default menuItems;
