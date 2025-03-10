@@ -81,7 +81,12 @@ export default function Developers() {
                       format="YYYY-MM-DD" // 날짜 형식 지정
                       value={startDate}
                       onChange={(newValue) => setStartDate(dayjs(newValue))}
-                      slotProps={{ textField: { size: 'small', variant: 'outlined', sx: { minWidth: 140, textAlign: 'center' } } }}
+                      slotProps={{
+                        textField: {
+                          variant: 'outlined',
+                          sx: { minWidth: 140, textAlign: 'center' }
+                        }
+                      }}
                     />
 
                     {/* '~' 기호 */}
@@ -93,8 +98,12 @@ export default function Developers() {
                       format="YYYY-MM-DD" // 날짜 형식 지정
                       value={endDate}
                       onChange={(newValue) => setEndDate(dayjs(newValue))}
-                      slotProps={{ textField: { size: 'small', variant: 'outlined', sx: { minWidth: 140, textAlign: 'center' } } }}
-                      // renderInput={(params) => <TextField {...params} size="small" sx={{ minWidth: 140, textAlign: 'center' }} />}
+                      slotProps={{
+                        textField: {
+                          variant: 'outlined',
+                          sx: { minWidth: 140, textAlign: 'center' }
+                        }
+                      }}
                     />
 
                     {/* 조회 버튼 */}
@@ -103,8 +112,6 @@ export default function Developers() {
                         variant="contained"
                         size="medium"
                         endIcon={<ChevronRightRoundedIcon />}
-                        // endIcon={<SendIcon />}
-                        // onClick={handleNext}
                         sx={{
                           width: { xs: '100%', sm: 'fit-content' }
                         }}

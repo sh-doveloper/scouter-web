@@ -51,7 +51,12 @@ export default function Projects() {
                       format="YYYY-MM-DD" // 날짜 형식 지정
                       value={startDate}
                       onChange={(newValue) => setStartDate(dayjs(newValue))}
-                      renderInput={(params) => <TextField {...params} size="small" sx={{ minWidth: 140, textAlign: 'center' }} />}
+                      slotProps={{
+                        textField: {
+                          variant: 'outlined',
+                          sx: { minWidth: 140, textAlign: 'center' }
+                        }
+                      }}
                     />
 
                     {/* '~' 기호 */}
@@ -63,7 +68,12 @@ export default function Projects() {
                       format="YYYY-MM-DD" // 날짜 형식 지정
                       value={endDate}
                       onChange={(newValue) => setEndDate(dayjs(newValue))}
-                      renderInput={(params) => <TextField {...params} size="small" sx={{ minWidth: 140, textAlign: 'center' }} />}
+                      slotProps={{
+                        textField: {
+                          variant: 'outlined',
+                          sx: { minWidth: 140, textAlign: 'center' }
+                        }
+                      }}
                     />
 
                     {/* 조회 버튼 */}
@@ -72,8 +82,6 @@ export default function Projects() {
                         variant="contained"
                         size="medium"
                         endIcon={<ChevronRightRoundedIcon />}
-                        // endIcon={<SendIcon />}
-                        // onClick={handleNext}
                         sx={{
                           width: { xs: '100%', sm: 'fit-content' }
                         }}

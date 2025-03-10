@@ -61,8 +61,8 @@ export default function Breadcrumbs({ title, ...others }) {
   const location = useLocation();
   const pathNames = location.pathname.split('/').filter((x) => x); // 현재 URL을 '/'로 나누어 배열로 변환
 
-  // 현재 URL을 기반으로 `menuItems`에서 `title` 찾기
-  const resolvedTitle = findTitleByPath(location.pathname, menuItems.items) || title;
+  // 현재 URL을 기반으로 `menuItems`에서 `title` 찾기 (boolean이면 무시)
+  const resolvedTitle = typeof title === 'string' ? title : findTitleByPath(location.pathname, menuItems.items);
 
   console.log('📢 Breadcrumbs Title:', resolvedTitle);
 
@@ -109,7 +109,7 @@ export default function Breadcrumbs({ title, ...others }) {
 }
 
 Breadcrumbs.propTypes = {
-  title: PropTypes.string, // title을 문자열로 받도록 설정
+  title: PropTypes.any,
   sx: PropTypes.any,
   others: PropTypes.any
 };
