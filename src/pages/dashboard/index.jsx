@@ -29,6 +29,7 @@ import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
 import DashboardDataGrid from './components/DashboardDataGrid';
 import { useState } from 'react';
+import LoginLineChart from './components/LoginLineChart';
 
 // avatar style
 const avatarSX = {
@@ -50,6 +51,8 @@ const actionSX = {
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 export default function DashboardDefault() {
+  const [loginGrowthRate, setLoginGrowthRate] = useState(0);
+  const [pushGrowthRate, setPushGrowthRate] = useState(0);
   const [mergeGrowthRate, setMergeGrowthRate] = useState(0);
 
   return (
@@ -68,10 +71,12 @@ export default function DashboardDefault() {
             <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
               <ListItemButton divider>
                 <ListItemText primary="최근 30일 전 Login 대비" />
-                <Typography variant="h5">+45.14%</Typography>
+                <Typography variant="h5" sx={{ color: loginGrowthRate >= 0 ? 'primary.main' : 'error.main' }}>
+                  {loginGrowthRate > 0 ? `+${loginGrowthRate}%` : `${loginGrowthRate}%`}
+                </Typography>
               </ListItemButton>
             </List>
-            <MergeLineChart />
+            <LoginLineChart setLoginGrowthRate={setLoginGrowthRate} />
           </MainCard>
         </Grid>
 
@@ -87,10 +92,12 @@ export default function DashboardDefault() {
             <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
               <ListItemButton divider>
                 <ListItemText primary="최근 30일 전 Push 대비" />
-                <Typography variant="h5">+45.14%</Typography>
+                <Typography variant="h5" sx={{ color: pushGrowthRate >= 0 ? 'primary.main' : 'error.main' }}>
+                  {pushGrowthRate > 0 ? `+${pushGrowthRate}%` : `${pushGrowthRate}%`}
+                </Typography>
               </ListItemButton>
             </List>
-            <MergeLineChart />
+            <MergeLineChart set />
           </MainCard>
         </Grid>
 
@@ -106,12 +113,7 @@ export default function DashboardDefault() {
             <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
               <ListItemButton divider>
                 <ListItemText primary="최근 30일 전 Merge 대비" />
-                <Typography
-                  variant="h5"
-                  sx={{
-                    color: mergeGrowthRate >= 0 ? 'primary.main' : 'error.main'
-                  }}
-                >
+                <Typography variant="h5" sx={{ color: mergeGrowthRate >= 0 ? 'primary.main' : 'error.main' }}>
                   {mergeGrowthRate > 0 ? `+${mergeGrowthRate}%` : `${mergeGrowthRate}%`}
                 </Typography>
               </ListItemButton>
@@ -170,7 +172,10 @@ export default function DashboardDefault() {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
         </Grid>
-        <Grid item xs={12} md={7} lg={6}>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
+        </Grid>
+        <Grid item xs={12} md={7} lg={12}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
               <Typography variant="h5">Recent Orders</Typography>

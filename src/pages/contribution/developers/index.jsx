@@ -57,73 +57,72 @@ export default function Developers() {
         <Grid item xs={12} md={7} lg={12}>
           {/* 검색 조건 영역 */}
           <MainCard sx={{ mt: 2 }} border={false} shadow={3} boxShadow>
-            <Grid container spacing={2}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
+              {/*<Grid container spacing={2} alignItems="center">*/}
               {/* 이름 검색 박스 */}
-              <Grid item>
-                <FormControl sx={{ m: 0, minWidth: 200 }}>
-                  <TextField
-                    id="outlined-basic"
-                    label="이름"
-                    variant="outlined"
-                    value={searchName}
-                    onChange={(e) => setSearchName(e.target.value)}
-                  />
-                </FormControl>
-              </Grid>
+              {/*<Grid item xs="auto">*/}
+              <FormControl sx={{ minWidth: 200 }}>
+                <TextField
+                  id="outlined-basic"
+                  label="이름"
+                  variant="outlined"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e.target.value)}
+                />
+              </FormControl>
+              {/*</Grid>*/}
 
               {/* 날짜 선택 박스 */}
-              <Grid item>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    {/* 시작일 */}
-                    <DatePicker
-                      label="시작일"
-                      format="YYYY-MM-DD" // 날짜 형식 지정
-                      value={startDate}
-                      onChange={(newValue) => setStartDate(dayjs(newValue))}
-                      slotProps={{
-                        textField: {
-                          variant: 'outlined',
-                          sx: { minWidth: 140, textAlign: 'center' }
-                        }
-                      }}
-                    />
+              {/*<Grid item xs="auto">*/}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                {/*<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>*/}
+                {/* 시작일 */}
+                <DatePicker
+                  label="시작일"
+                  format="YYYY-MM-DD" // 날짜 형식 지정
+                  value={startDate}
+                  onChange={(newValue) => setStartDate(dayjs(newValue))}
+                  slotProps={{
+                    textField: {
+                      variant: 'outlined',
+                      sx: { minWidth: 140, textAlign: 'center' }
+                    }
+                  }}
+                />
 
-                    {/* '~' 기호 */}
-                    <Typography variant="body1">~</Typography>
+                {/* '~' 기호 */}
+                {/*<Typography variant="body1">~</Typography>*/}
 
-                    {/* 종료일 */}
-                    <DatePicker
-                      label="종료일"
-                      format="YYYY-MM-DD" // 날짜 형식 지정
-                      value={endDate}
-                      onChange={(newValue) => setEndDate(dayjs(newValue))}
-                      slotProps={{
-                        textField: {
-                          variant: 'outlined',
-                          sx: { minWidth: 140, textAlign: 'center' }
-                        }
-                      }}
-                    />
+                {/* 종료일 */}
+                <DatePicker
+                  label="종료일"
+                  format="YYYY-MM-DD" // 날짜 형식 지정
+                  value={endDate}
+                  onChange={(newValue) => setEndDate(dayjs(newValue))}
+                  slotProps={{
+                    textField: {
+                      variant: 'outlined',
+                      sx: { minWidth: 140, textAlign: 'center' }
+                    }
+                  }}
+                />
 
-                    {/* 조회 버튼 */}
-                    <Grid item>
-                      <Button
-                        variant="contained"
-                        size="medium"
-                        endIcon={<ChevronRightRoundedIcon />}
-                        sx={{
-                          width: { xs: '100%', sm: 'fit-content' }
-                        }}
-                        onClick={handleSearch}
-                      >
-                        {'조회'}
-                      </Button>
-                    </Grid>
-                  </Box>
-                </LocalizationProvider>
-              </Grid>
-            </Grid>
+                {/* 조회 버튼 */}
+                {/*<Grid item xs="auto">*/}
+                <Button
+                  variant="contained"
+                  size="medium"
+                  endIcon={<ChevronRightRoundedIcon />}
+                  sx={{ width: { sm: 'fit-content' } }}
+                  onClick={handleSearch}
+                >
+                  {'조회'}
+                </Button>
+                {/*</Grid>*/}
+              </LocalizationProvider>
+              {/*</Grid>*/}
+              {/*</Grid>*/}
+            </Box>
           </MainCard>
 
           {/* 검색 결과 영역 */}

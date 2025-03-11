@@ -45,16 +45,11 @@ const breadcrumbMap = {
 
 // 현재 경로(`pathname`)를 기반으로 `menuItems`에서 `title`을 찾는 함수
 const findTitleByPath = (pathname, menuList) => {
-  for (const menu of menuList) {
-    if (menu.children) {
-      for (const item of menu.children) {
-        if (item.url === pathname) {
-          return item.title;
-        }
-      }
-    }
-  }
-  return '';
+  return (
+    menuList
+      .flatMap((menu) => menu.children || []) // `children`이 있는 경우 평탄화(flatten)
+      .find((item) => item.url === pathname)?.title || '' // `find`로 URL이 일치하는 항목 찾기
+  );
 };
 
 export default function Breadcrumbs({ title, ...others }) {
@@ -64,11 +59,10 @@ export default function Breadcrumbs({ title, ...others }) {
   // 현재 URL을 기반으로 `menuItems`에서 `title` 찾기 (boolean이면 무시)
   const resolvedTitle = typeof title === 'string' ? title : findTitleByPath(location.pathname, menuItems.items);
 
-  console.log('📢 Breadcrumbs Title:', resolvedTitle);
-
   return (
     <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
       <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
+        {/* navigation */}
         <Grid item>
           <MuiBreadcrumbs aria-label="breadcrumb">
             {pathNames.map((value, index) => {
@@ -77,17 +71,18 @@ export default function Breadcrumbs({ title, ...others }) {
             })}
           </MuiBreadcrumbs>
         </Grid>
+        {/* Title */}
         {resolvedTitle && (
           <Grid item sx={{ mt: 2, width: '100%' }}>
             {resolvedTitle && (
               <Grid item sx={{ mt: 2, width: '100%' }}>
                 <Typography
-                  variant="h4" // 크기 키우기
+                  variant="h4"
                   sx={{
                     fontWeight: 'bold', // 굵기 강조
                     textAlign: 'left', // 좌측 정렬
                     letterSpacing: '0.5px', // 글자 간격 살짝 넓히기
-                    textTransform: 'capitalize', // 대문자로 변환
+                    textTransform: 'capitalize', // 첫자만 대문자
                     color: 'primary.main', // 테마 색상 사용
                     borderBottom: '2px solid', // 하단 경계선 추가
                     borderColor: 'primary.light', // 경계선 색상 조정
@@ -99,9 +94,6 @@ export default function Breadcrumbs({ title, ...others }) {
               </Grid>
             )}
           </Grid>
-          // <Grid item sx={{ mt: 2 }}>
-          //   <Typography variant="h5">{resolvedTitle}</Typography>
-          // </Grid>
         )}
       </Grid>
     </MainCard>
