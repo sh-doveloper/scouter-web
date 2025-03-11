@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 import { fetchMergeChartData } from '../api/DashBoardData';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 
 // 기본 차트 옵션
 const areaChartOptions = {
@@ -46,7 +47,7 @@ const areaChartOptions = {
 
 // ==============================|| REPORT AREA CHART ||============================== //
 
-export default function MergeLineChart({ setMergeGrowthRate }) {
+export default function MergeLineChart({ setMergeGrowthRate = () => {} }) {
   const theme = useTheme();
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
@@ -176,3 +177,7 @@ export default function MergeLineChart({ setMergeGrowthRate }) {
     </>
   );
 }
+
+MergeLineChart.propTypes = {
+  setMergeGrowthRate: PropTypes.func // `setMergeGrowthRate`는 함수 타입이어야 함
+};
